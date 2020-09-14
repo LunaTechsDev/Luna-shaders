@@ -1,42 +1,43 @@
 /*:
 @author LunaTechs - Kino
-@plugindesc A plugin that displays the current build version of your
-project on the title screen <LunaVersion>.
+@plugindesc A plugin that displays the copyright
+text on the title screen <LunaCopyright>.
 
 @target MV MZ
 
 @param x
 @text X Position
-@desc The X position of the version number window.
-@default 0
+@desc The X position of the copyright window.
+@default 680
 
 @param y
 @text Y Position
-@desc The Y position of the version number window.
-@default 540
+@desc The Y position of the copyright window.
+@default 570
 
 @param width
 @text Width
-@desc The width of the version number window.
-@default 100
+@desc The width of the copyright window.
+@default 170
 
 @param height
 @text Height
-@desc The height of the version number window
+@desc The height of the copyright window
 @default 75
 
 @param fontSize
 @text Font Size
-@desc The font size of the version number window
-@default 24
+@desc The font size of the copyright window
+@default 28
 
 @param fontFace
 @text Font Face
-@desc The font face of the version number window optional parameter(requires Luna-More-Fonts);
+@desc The font face of the copyright window optional parameter(requires Luna-More-Fonts);
 
-@param versionText
-@text Version Text
-@desc The version text 
+@param copyrightText
+@text Copyright Text
+@desc The copyright text 
+@default © LunaTechs 2020-2021
 
 @help
 A plugin that displays the current build version of your

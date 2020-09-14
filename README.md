@@ -1,4 +1,3 @@
-# Luna Version Number
+# Luna Copyright 
 ### Author LunaTechs - Kino
->  A plugin that displays the current build version of your
-project on the title screen.
+> A plugin that allows you to add a copyright message to your game title screen.

@@ -1,7 +1,7 @@
 import rm.core.Rectangle;
 import rm.windows.Window_Base;
 
-class WindowVersion extends Window_Base {
+class WindowCopyright extends Window_Base {
  public function new(x: Int, y: Int, width: Int, height: Int) {
   #if compileMV
   super(x, y, width, height);
@@ -20,13 +20,13 @@ class WindowVersion extends Window_Base {
  }
 
  public function drawVersionText() {
-  this.contents.fontSize = LunaVersion.VParams.fontSize;
-  var fontFace = LunaVersion.VParams.fontFace;
+  this.contents.fontSize = LunaCopyright.CParams.fontSize;
+  var fontFace = LunaCopyright.CParams.fontFace;
   if (fontFace != null || fontFace.length > 0) {
    this.contents.fontFace = fontFace;
   }
-  this.drawText(LunaVersion.VParams.versionText, 0, 0, this.contentsWidth(),
-   "left");
+  this.drawText(LunaCopyright.CParams.copyrightText, 0, 0,
+   this.contentsWidth(), "left");
  }
 
  public override function update() {

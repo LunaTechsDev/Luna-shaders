@@ -1,43 +1,10 @@
 /*:
 @author LunaTechs - Kino
 @plugindesc A plugin that displays the copyright
-text on the title screen <LunaCopyright>.
+text on the title screen <LunaShaders>.
 
 @target MV MZ
 
-@param x
-@text X Position
-@desc The X position of the copyright window.
-@default 680
-
-@param y
-@text Y Position
-@desc The Y position of the copyright window.
-@default 570
-
-@param width
-@text Width
-@desc The width of the copyright window.
-@default 170
-
-@param height
-@text Height
-@desc The height of the copyright window
-@default 75
-
-@param fontSize
-@text Font Size
-@desc The font size of the copyright window
-@default 28
-
-@param fontFace
-@text Font Face
-@desc The font face of the copyright window optional parameter(requires Luna-More-Fonts);
-
-@param copyrightText
-@text Copyright Text
-@desc The copyright text 
-@default © LunaTechs 2020-2021
 
 @help
 A plugin that displays the current build version of your

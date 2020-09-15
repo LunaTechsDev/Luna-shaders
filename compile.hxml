@@ -23,15 +23,15 @@
 
 # Note you can call an hxml file inside an hxml file for build purposes.
 # For Compiling Separate JavaScript Files
---macro macros.MacroTools.includeJsLib("./src/LunaCopyrightParams.js")
--main LunaCopyright
+--macro macros.MacroTools.includeJsLib("./src/LunaShadersParams.js")
+-main LunaShaders
 --each
 
 --next
--js dist/Luna_Copyright.js
+-js dist/Luna_Shaders.js
 # You can include plugin parameters as a macro in your compile.hxml
 --next
 -D compileMV
--js dist/Luna_CopyrightMV.js
+-js dist/Luna_ShadersMV.js
 
 --cmd haxe -D gamePath=../games/LunaTechsMZ --run CleanJs

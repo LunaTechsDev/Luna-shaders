@@ -53,6 +53,7 @@ class CleanJs {
      || lineContent.contains("#haxeui")
      || lineContent.contains("haxe_ui")
      || lineContent.contains("return")
+     || lineContent.contains("super(")
      && !lineContent.contains("_$LTGlobals_$")) {
      return lineContent;
     } else {

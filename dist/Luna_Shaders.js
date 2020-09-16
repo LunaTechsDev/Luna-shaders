@@ -2,7 +2,7 @@
 // Luna_Shaders.js
 //=============================================================================
 //=============================================================================
-// Build Date: 2020-09-14 20:10:25
+// Build Date: 2020-09-15 20:12:37
 //=============================================================================
 //=============================================================================
 // Made with LunaTea -- Haxe
@@ -58,9 +58,17 @@ class EReg {
 		return this.r.m != null;
 	}
 }
+class GBAShader extends PIXI.Filter {
+	constructor(texture) {
+		super(null,"varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main() {\n  vec4 oc = texture2D(uSampler, vTextureCoord);\n  vec3 col = vec3(oc.rgb);\n  col.rgb = vec3((oc.r * .29) + (oc.g * .59) + (oc.b * .045));\n  col.g = col.g * 1.45;\n  gl_FragColor = vec4((vec3(col.rgb)), oc.a);\n}",{ uSampler : texture});
+	}
+	static create(texture) {
+		return new GBAShader(texture);
+	}
+}
 class HeatWaveShader extends PIXI.Filter {
 	constructor(texture,time) {
-		super(null,"\n  varying vec2 vTextureCoord;\n  uniform sampler2D uSampler;\n  uniform float time;\n  void main(void) {\n    //Normalized Pixel Coordinates in Pixi\n    vec2 uv =  vTextureCoord;\n    float update_time = 0.05 * time;\n    const vec2 scale = vec2(.5);\n\n    uv += 0.05*sin(scale * update_time + length( uv) * 1.5);\n    gl_FragColor = texture2D(uSampler, uv);\n  }",{ uSampler : texture, time : time});
+		super(null,"varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nuniform float time;\nvoid main(void){\n  //Normalized Pixel Coordinates in Pixi\n  vec2 uv=vTextureCoord;\n  float update_time=.05*time;\n  const vec2 scale=vec2(.5);\n  \n  uv+=.05*sin(scale*update_time+length(uv)*1.5);\n  gl_FragColor=texture2D(uSampler,uv);\n}",{ uSampler : texture, time : time});
 	}
 	static create(texture,time) {
 		return new HeatWaveShader(texture,time);
@@ -68,7 +76,7 @@ class HeatWaveShader extends PIXI.Filter {
 }
 class MonochromeShader extends PIXI.Filter {
 	constructor(texture) {
-		super(null,"\n  varying vec2 vTextureCoord;\n  uniform sampler2D uSampler;\n  void main(void) {\n    vec4 oc = texture2D(uSampler, vTextureCoord);\n    vec4 weighted_color = vec4(oc.r * 0.3, oc.g * 0.59, oc.b * 0.11, oc.a);\n    vec3 grey_scale = vec3(0.2, 0.2, 0.2);\n    vec4 avg_color = vec4(vec3(dot(oc.rgb, grey_scale)), oc.a);\n    gl_FragColor = avg_color;\n  }",{ uSampler : texture});
+		super(null,"varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main(void){\n  vec4 oc=texture2D(uSampler,vTextureCoord);\n  vec4 col=oc;\n  vec4 weighted_color=vec4(oc.r*.3,oc.g*.59,oc.b*.11,oc.a);\n  vec3 grey_scale=vec3(.35,.35,.35);\n  vec3 avg=oc.rgb*.65;\n  col.rgb=vec3((oc.r*.3)+(oc.g*.59)+(oc.b*.11));\n  vec4 avg_color=vec4(vec3(dot(oc.rgb,avg)),oc.a);\n  gl_FragColor=vec4(vec3(col.rgb),oc.a);\n}",{ uSampler : texture});
 	}
 	static create(texture) {
 		return new MonochromeShader(texture);
@@ -108,7 +116,11 @@ class haxe_iterators_ArrayIterator {
 }
 class _$LTGlobals_$ {
 }
+GBAShader.fragSrc = "varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main() {\n  vec4 oc = texture2D(uSampler, vTextureCoord);\n  vec3 col = vec3(oc.rgb);\n  col.rgb = vec3((oc.r * .29) + (oc.g * .59) + (oc.b * .045));\n  col.g = col.g * 1.45;\n  gl_FragColor = vec4((vec3(col.rgb)), oc.a);\n}";
+HeatWaveShader.fragSrc = "varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nuniform float time;\nvoid main(void){\n  //Normalized Pixel Coordinates in Pixi\n  vec2 uv=vTextureCoord;\n  float update_time=.05*time;\n  const vec2 scale=vec2(.5);\n  \n  uv+=.05*sin(scale*update_time+length(uv)*1.5);\n  gl_FragColor=texture2D(uSampler,uv);\n}";
+MonochromeShader.fragSrc = "varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main(void){\n  vec4 oc=texture2D(uSampler,vTextureCoord);\n  vec4 col=oc;\n  vec4 weighted_color=vec4(oc.r*.3,oc.g*.59,oc.b*.11,oc.a);\n  vec3 grey_scale=vec3(.35,.35,.35);\n  vec3 avg=oc.rgb*.65;\n  col.rgb=vec3((oc.r*.3)+(oc.g*.59)+(oc.b*.11));\n  vec4 avg_color=vec4(vec3(dot(oc.rgb,avg)),oc.a);\n  gl_FragColor=vec4(vec3(col.rgb),oc.a);\n}";
 LunaShaders.HeatWaveShader = HeatWaveShader
 LunaShaders.MonochromeShader = MonochromeShader
+LunaShaders.GBAShader = GBAShader
 LunaShaders.main()
 })(typeof exports != "undefined" ? exports : typeof window != "undefined" ? window : typeof self != "undefined" ? self : this, {})

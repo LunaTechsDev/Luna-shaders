@@ -26,6 +26,8 @@ class LunaShaders {
  public static var CParams: CopyrightParams;
  public static var HeatWaveShader = shaders.HeatWaveShader;
  public static var MonochromeShader = shaders.MonochromeShader;
+ public static var GBShader = shaders.GBShader;
+ public static var GBBlueShader = shaders.GBBlueShader;
 
  public static function main() {
   Comment.title("Parameters");

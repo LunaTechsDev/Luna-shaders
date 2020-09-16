@@ -2,7 +2,7 @@
 // Luna_Shaders.js
 //=============================================================================
 //=============================================================================
-// Build Date: 2020-09-15 20:12:37
+// Build Date: 2020-09-15 20:40:57
 //=============================================================================
 //=============================================================================
 // Made with LunaTea -- Haxe
@@ -58,12 +58,20 @@ class EReg {
 		return this.r.m != null;
 	}
 }
-class GBAShader extends PIXI.Filter {
+class GBBlueShader extends PIXI.Filter {
 	constructor(texture) {
-		super(null,"varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main() {\n  vec4 oc = texture2D(uSampler, vTextureCoord);\n  vec3 col = vec3(oc.rgb);\n  col.rgb = vec3((oc.r * .29) + (oc.g * .59) + (oc.b * .045));\n  col.g = col.g * 1.45;\n  gl_FragColor = vec4((vec3(col.rgb)), oc.a);\n}",{ uSampler : texture});
+		super(null,"varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main(void){\n  \n  vec4 oc=texture2D(uSampler,vTextureCoord);\n  vec3 col=vec3(oc.rgb);\n  vec3 greyScale=vec3(.5,.5,.5);\n  vec3 col=vec3(oc.rgb);\n  col.rgb=vec3((oc.r*.29)+(oc.g*.59)+(oc.b*.045));\n  col.b=col.b*1.95;\n  // col.rgb = vec3(col.rgb * 0.8);\n  fragColor=vec4(vec3(col.rgb),tex.a);\n  \n}",{ uSampler : texture});
 	}
 	static create(texture) {
-		return new GBAShader(texture);
+		return new GBBlueShader(texture);
+	}
+}
+class GBShader extends PIXI.Filter {
+	constructor(texture) {
+		super(null,"varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main() {\n  vec4 oc = texture2D(uSampler, vTextureCoord);\n  vec3 col = vec3(oc.rgb);\n  col.rgb = vec3((oc.r * .29) + (oc.g * .59) + (oc.b * .045));\n  col.g = col.g * 1.45;\n  //May add later for darker tones\n  // col.rgb = vec3(col.rgb * 0.8);\n  gl_FragColor = vec4((vec3(col.rgb)), oc.a);\n}",{ uSampler : texture});
+	}
+	static create(texture) {
+		return new GBShader(texture);
 	}
 }
 class HeatWaveShader extends PIXI.Filter {
@@ -116,11 +124,13 @@ class haxe_iterators_ArrayIterator {
 }
 class _$LTGlobals_$ {
 }
-GBAShader.fragSrc = "varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main() {\n  vec4 oc = texture2D(uSampler, vTextureCoord);\n  vec3 col = vec3(oc.rgb);\n  col.rgb = vec3((oc.r * .29) + (oc.g * .59) + (oc.b * .045));\n  col.g = col.g * 1.45;\n  gl_FragColor = vec4((vec3(col.rgb)), oc.a);\n}";
+GBBlueShader.fragSrc = "varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main(void){\n  \n  vec4 oc=texture2D(uSampler,vTextureCoord);\n  vec3 col=vec3(oc.rgb);\n  vec3 greyScale=vec3(.5,.5,.5);\n  vec3 col=vec3(oc.rgb);\n  col.rgb=vec3((oc.r*.29)+(oc.g*.59)+(oc.b*.045));\n  col.b=col.b*1.95;\n  // col.rgb = vec3(col.rgb * 0.8);\n  fragColor=vec4(vec3(col.rgb),tex.a);\n  \n}";
+GBShader.fragSrc = "varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main() {\n  vec4 oc = texture2D(uSampler, vTextureCoord);\n  vec3 col = vec3(oc.rgb);\n  col.rgb = vec3((oc.r * .29) + (oc.g * .59) + (oc.b * .045));\n  col.g = col.g * 1.45;\n  //May add later for darker tones\n  // col.rgb = vec3(col.rgb * 0.8);\n  gl_FragColor = vec4((vec3(col.rgb)), oc.a);\n}";
 HeatWaveShader.fragSrc = "varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nuniform float time;\nvoid main(void){\n  //Normalized Pixel Coordinates in Pixi\n  vec2 uv=vTextureCoord;\n  float update_time=.05*time;\n  const vec2 scale=vec2(.5);\n  \n  uv+=.05*sin(scale*update_time+length(uv)*1.5);\n  gl_FragColor=texture2D(uSampler,uv);\n}";
 MonochromeShader.fragSrc = "varying vec2 vTextureCoord;\nuniform sampler2D uSampler;\nvoid main(void){\n  vec4 oc=texture2D(uSampler,vTextureCoord);\n  vec4 col=oc;\n  vec4 weighted_color=vec4(oc.r*.3,oc.g*.59,oc.b*.11,oc.a);\n  vec3 grey_scale=vec3(.35,.35,.35);\n  vec3 avg=oc.rgb*.65;\n  col.rgb=vec3((oc.r*.3)+(oc.g*.59)+(oc.b*.11));\n  vec4 avg_color=vec4(vec3(dot(oc.rgb,avg)),oc.a);\n  gl_FragColor=vec4(vec3(col.rgb),oc.a);\n}";
 LunaShaders.HeatWaveShader = HeatWaveShader
 LunaShaders.MonochromeShader = MonochromeShader
-LunaShaders.GBAShader = GBAShader
+LunaShaders.GBShader = GBShader
+LunaShaders.GBBlueShader = GBBlueShader
 LunaShaders.main()
 })(typeof exports != "undefined" ? exports : typeof window != "undefined" ? window : typeof self != "undefined" ? self : this, {})
